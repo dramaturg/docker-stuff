@@ -1,0 +1,9 @@
+
+common:
+    loglevel: info
+
+dev:
+    #loglevel: debug
+    storage: local
+    storage_path: /registry
+
