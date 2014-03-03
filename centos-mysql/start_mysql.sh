@@ -4,13 +4,15 @@ set -e
 
 password="new-password"
 
-if [ ! -d /var/run/mysqld/mysql ] ; then 
-   chown mysql.mysql /var/run/mysqld/
+if [ -d /var/lib/mysql/mysql ] ; then 
+   /usr/bin/mysqld_safe
+else
+   chown mysql.mysql /var/lib/mysql/
 
    /usr/bin/mysql_install_db
 
    cd /usr 
-   /usr/bin/mysqld_safe --skip-networking &
+   /usr/bin/mysqld_safe &
    sleep 5
 
    /usr/bin/mysqladmin password "$password"
@@ -19,5 +21,4 @@ if [ ! -d /var/run/mysqld/mysql ] ; then
    wait $!
 fi
 
-/usr/bin/mysqld_safe
 
