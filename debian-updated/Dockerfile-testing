@@ -1,5 +1,5 @@
 
-FROM debian:wheezy
+FROM debian:testing
 
 ENV DEBIAN_FRONTEND noninteractive
 
