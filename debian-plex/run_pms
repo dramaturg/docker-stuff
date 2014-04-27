@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while [ 1 ]
+do
+	/usr/sbin/start_pms
+	sleep 5
+done
