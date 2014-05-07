@@ -1,0 +1,8 @@
+
+Package: *
+Pin: release a=grml-stable
+Pin-Priority: 900
+
+Package: *
+Pin: release a=grml-testing
+Pin-Priority: 400
