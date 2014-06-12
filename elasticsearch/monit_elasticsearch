@@ -1,0 +1,22 @@
+
+check process elasticsearch with pidfile /var/run/elasticsearch.pid
+  start program = "/etc/init.d/elasticsearch start"
+  stop program  = "/etc/init.d/elasticsearch stop"
+  if cpu > 90% for 5 cycles then restart
+  if totalmem > 2 GB for 5 cycles then restart
+  if loadavg(5min) greater than 10 for 8 cycles then stop
+  if 3 restarts within 5 cycles then timeout
+  if failed url http://127.0.0.1:9200/ with timeout 15 seconds then restart
+  group elasticsearch
+
+check host elasticsearch_connection with address 127.0.0.1
+  if failed url http://127.0.0.1:9200/ with timeout 15 seconds then alert
+  group elasticsearch
+
+check host elasticsearch_cluster_health with address 127.0.0.1
+  if failed url http://127.0.0.1:9200/_cluster/health  
+	and content == 'green'
+	with timeout 60 seconds
+  then alert
+  group elasticsearch
+
