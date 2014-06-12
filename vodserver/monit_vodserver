@@ -1,0 +1,8 @@
+
+check process vodserver with pidfile /var/run/vodserver.pid
+  start program = "/sbin/start-stop-daemon --start --background --make-pidfile --pidfile /var/run/vodserver.pid --chdir /opt/vodserver --exec /usr/bin/java -- -jar VODServer.jar"
+  stop program = "/sbin/start-stop-daemon --stop --pidfile /var/run/vodserver.pid"
+  if totalmem > 2 GB for 5 cycles then restart
+  if 3 restarts within 5 cycles then timeout
+  if failed host 127.0.0.1 port 9999 then restart
+

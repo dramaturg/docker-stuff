@@ -1,0 +1,3 @@
+deb http://packages.linuxmint.com/ debian main upstream import
+deb http://debian.linuxmint.com/incoming/multimedia testing main non-free
+
