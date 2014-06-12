@@ -13,11 +13,12 @@ RUN apt-key adv --keyserver eu.pool.sks-keyservers.net \
 RUN echo deb http://shell.ninthgate.se/packages/debian $(lsb_release -sc) main \
 		> /etc/apt/sources.list.d/plex.list
 RUN apt-get -y update
-RUN apt-get -y install procps avahi-autoipd plexmediaserver
+RUN apt-get -y install procps avahi-autoipd plexmediaserver ; apt-get clean
 
+RUN cd /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Plug-ins/ && \
+	su plex -c "git clone https://github.com/mikedm139/UnSupportedAppstore.bundle"
 
-EXPOSE 32400 32443
-ADD run_pms /root/run_pms
-RUN chmod 755 /root/run_pms
-CMD /root/run_pms
+ADD monit_plex /etc/monit/conf.d/plex
+EXPOSE 32400
+EXPOSE 32443
 
