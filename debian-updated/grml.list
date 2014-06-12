@@ -1,2 +1,7 @@
+
 deb     http://deb.grml.org/ grml-stable  main
 deb-src http://deb.grml.org/ grml-stable  main
+
+deb     http://deb.grml.org/ grml-testing main
+deb-src http://deb.grml.org/ grml-testing main
+

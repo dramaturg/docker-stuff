@@ -1,13 +1,13 @@
 
-all: stable testing
+all:
+	docker build -t dramaturg/debian-updated .
 
-stable:
+rebuild:
 	docker pull debian:wheezy
 	docker build --no-cache=true -t dramaturg/debian-updated .
 
-testing:
-	docker pull debian:testing
-	docker build --no-cache=true -t dramaturg/debian-updated:testing - < Dockerfile-testing
-
 push:
 	docker push dramaturg/debian-updated
+
+run:
+	docker run -d -i -t dramaturg/debian-updated
