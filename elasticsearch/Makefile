@@ -3,6 +3,7 @@ all:
 	docker build -t dramaturg/elasticsearch .
 
 push:
+	docker tag dramaturg/elasticsearch dramaturg/elasticsearch:$$(date +%Y%m%d) 
 	docker push dramaturg/elasticsearch
 
 run:

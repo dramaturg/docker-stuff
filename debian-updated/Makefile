@@ -7,6 +7,7 @@ rebuild:
 	docker build --no-cache=true -t dramaturg/debian-updated .
 
 push:
+	docker tag dramaturg/debian-updated dramaturg/debian-updated:$$(date +%Y%m%d) 
 	docker push dramaturg/debian-updated
 
 run:

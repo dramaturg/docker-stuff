@@ -3,7 +3,7 @@ all:
 	docker build -t dramaturg/vodserver .
 
 push:
-	docker tag dramaturg/vodserver dramaturg/vodserver:$(date +%Y%m%d) 
+	docker tag dramaturg/vodserver dramaturg/vodserver:$$(date +%Y%m%d) 
 	docker push dramaturg/vodserver
 
 run:
