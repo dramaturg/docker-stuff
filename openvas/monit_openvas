@@ -1,0 +1,24 @@
+
+check process openvassd
+	matching "openvassd"
+	group openvas
+	start program = "/usr/local/sbin/openvassd sleep 15"
+	stop  program = "/usr/bin/pkill openvassd"
+	if 5 restarts within 5 cycles then timeout
+
+check process openvasmd
+	matching "openvasmd"
+	group openvas
+	depends on openvassd
+	start program = "/usr/local/sbin/openvasmd --listen=127.0.0.1 --port=9393"
+	stop  program = "/usr/bin/pkill openvasmd"
+	if 5 restarts within 5 cycles then timeout
+
+check process gsad
+	matching "gsad"
+	group openvas
+	depends on openvassd, openvasmd
+	start program = "/usr/local/sbin/gsad --port=9390 --mlisten=127.0.0.1 --mport=9393"
+	stop  program = "/usr/bin/pkill gsad"
+	if 5 restarts within 5 cycles then timeout
+
