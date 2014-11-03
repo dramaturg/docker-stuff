@@ -7,5 +7,10 @@ push:
 	docker push dramaturg/elasticsearch
 
 run:
-	docker run -d -i -t --name=elasticsearch -p 9200:9200 dramaturg/elasticsearch
+	docker run -d -i -t --name=elasticsearch \
+		-p 9200:9200 -p 9300:9300 -p 5601:5601 \
+		-p 514:5014 -p 514:5014/udp \
+		-p 24224:24224 -p 24224:24224/udp \
+		-p 8888:8888 -p 9880:9880 \
+		dramaturg/elasticsearch
 

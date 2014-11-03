@@ -1,0 +1,8 @@
+
+check process kibana
+	matching "kibana.jar"
+	group elasticsearch
+	depends on elasticsearch
+	start program = "/opt/kibana/bin/kibana"
+	stop  program = "/usr/bin/pkill -f kibana.jar"
+	if 5 restarts within 5 cycles then timeout
