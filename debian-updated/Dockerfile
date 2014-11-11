@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Sebastian Krohn <seb@gaia.sunn.de>
 
 # clean out, update and install some base utilities
-RUN apt-get -y remove exim4-base exim4-config
+#RUN apt-get -y remove exim4-base exim4-config
 RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
-	openssh-server monit unattended-upgrades ssmtp lsof && apt-get clean
+	monit unattended-upgrades ssmtp lsof && apt-get clean
 
 
 # add contrib, non-free and backports repositories
@@ -31,9 +31,9 @@ RUN apt-get -y -o Dpkg::Options::="--force-confnew" \
 
 
 # set random root password
-#RUN P="$(dd if=/dev/random bs=1 count=8 2>/dev/null | base64)" ; echo $P && echo "root:$P" | chpasswd
+RUN P="$(dd if=/dev/random bs=1 count=8 2>/dev/null | base64)" ; echo $P && echo "root:$P" | chpasswd
 # set to foobar
-RUN P="foobar" ; echo $P && echo "root:$P" | chpasswd
+#RUN P="foobar" ; echo $P && echo "root:$P" | chpasswd
 RUN chsh -s /bin/zsh root
 
 
@@ -45,13 +45,11 @@ ADD apt_periodic /etc/apt/apt.conf.d/02periodic
 # service management with monit
 RUN cd /etc/monit/conf.d/ && \
 	echo "set httpd port 2812 allow 172.16.0.0/12" > monit_httpd && \
-	ln -s ../monitrc.d/openssh-server && \
 	ln -s ../monitrc.d/cron && \
 	ln -s ../monitrc.d/at && \
 	ln -s ../monitrc.d/rsyslog
 
 
 # run stuff
-EXPOSE 22
 CMD monit -I -v
 
