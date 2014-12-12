@@ -1,0 +1,15 @@
+
+<match **>
+  type gelf
+  host 0.0.0.0
+  port 12201
+  flush_interval 5s
+
+  buffer_type memory
+  buffer_chunk_limit 256m
+  buffer_queue_limit 20000
+  flush_interval 30s
+  retry_limit 60
+  retry_wait 10s
+</match>
+
