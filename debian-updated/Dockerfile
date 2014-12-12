@@ -9,7 +9,7 @@ MAINTAINER Sebastian Krohn <seb@gaia.sunn.de>
 #RUN apt-get -y remove exim4-base exim4-config
 RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
-	monit unattended-upgrades ssmtp lsof && apt-get clean
+	monit unattended-upgrades ssmtp lsof procps && apt-get clean
 
 
 # add contrib, non-free and backports repositories
@@ -51,5 +51,6 @@ RUN cd /etc/monit/conf.d/ && \
 
 
 # run stuff
-CMD monit -I -v
+ADD configurator.sh /root/
+CMD bash /root/configurator.sh && monit -I -v
 
