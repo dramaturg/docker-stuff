@@ -1,0 +1,6 @@
+
+/var/log/td-agent/td-agent.log {
+    daily
+    maxsize 100M
+    rotate 0
+}
