@@ -7,7 +7,7 @@ MAINTAINER Sebastian Krohn <seb@gaia.sunn.de>
 
 # clean out, update and install some base utilities
 #RUN apt-get -y remove exim4-base exim4-config
-RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y update && apt-get -y upgrade && apt-get clean
 RUN apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
 	monit unattended-upgrades ssmtp lsof procps && apt-get clean
 

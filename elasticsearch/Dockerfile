@@ -13,11 +13,11 @@ RUN echo deb http://packages.elasticsearch.org/logstash/1.4/debian \
 		stable main > /etc/apt/sources.list.d/logstash.list
 
 RUN apt-get -y update && \
-	apt-get -y install elasticsearch openjdk-7-jre-headless && \
+	apt-get -y install elasticsearch openjdk-7-jre-headless tzdata-java/testing && \
 	apt-get clean
 
 WORKDIR /opt
-RUN curl -OL https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-BETA1.1.tar.gz && \
+RUN curl -OL https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-linux-x64.tar.gz && \
 	tar xzf kibana-*.tar.gz && rm kibana-*.tar.gz && \
 	ln -s kibana-* kibana && \
 	sed -i '${s/$/ \&/}' /opt/kibana/bin/kibana

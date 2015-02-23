@@ -6,12 +6,14 @@ MAINTAINER Sebastian Krohn <seb@gaia.sunn.de>
 
 
 ## installation graylog2
-RUN apt-get -y install procps apt-transport-https && \
+RUN apt-get -y update && \
+	apt-get -y install procps apt-transport-https && \
+	apt-get clean && \
 	apt-key adv --keyserver pool.sks-keyservers.net --recv-keys D44C1D8DB1606F22
 
 ADD graylog2.list /etc/apt/sources.list.d/
 RUN apt-get -y update && \
-	apt-get -y install graylog2-server graylog2-web && \
+	apt-get -y install graylog2-server graylog2-web openjdk-7-jre-headless tzdata-java/testing && \
 	apt-get clean
 
 
@@ -54,7 +56,10 @@ RUN sed -i \
 		/etc/graylog2/web/graylog2-web-interface.conf
 ENV conff_graylog /etc/graylog2.conf
 ENV conff_graylog-web /etc/graylog2/web/graylog2-web-interface.conf
+
 ADD monit_graylog2 /etc/monit/conf.d/graylog2
+ADD graylog_create_udp_input /root/graylog_create_udp_input
+
 EXPOSE 9000 12201 12201/udp 12900
 
 

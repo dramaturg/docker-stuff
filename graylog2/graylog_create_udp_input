@@ -1,0 +1,10 @@
+
+function error_exit { exit 99; }; trap error_exit ERR
+
+if ! curl -s --user admin:admin1 -XGET http://localhost:12900/system/inputs | grep "GELFUDPInput" &> /dev/null; then
+curl --user admin:foobar -XPOST http://localhost:12900/system/inputs -H "Content-Type: application/json" -d '{"type": "org.graylog2.inputs.gelf.udp.GELFUDPInput", "creator_user_id": "admin", "title": "gelf-udp", "global": true, "configuration": { "port": 12201, "bind_address": "0.0.0.0" } }'
+fi
+
+if ! curl -s --user admin:admin1 -XGET http://localhost:12900/system/inputs | grep "SyslogUDPInput" &> /dev/null; then
+curl --user admin:admin1 -XPOST http://localhost:12900/system/inputs -H "Content-Type: application/json" -d '{"type": "org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id": "admin", "title": "syslog-udp", "global": true, "configuration": { "port": 12514, "bind_address": "0.0.0.0" } }'
+fi
