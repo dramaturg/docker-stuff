@@ -52,5 +52,6 @@ RUN cd /etc/monit/conf.d/ && \
 
 # run stuff
 ADD configurator.sh /root/
-CMD bash /root/configurator.sh && monit -I -v
+ENTRYPOINT bash /root/configurator.sh && /etc/init.d/monit start && /bin/zsh
+CMD /bin/zsh
 
