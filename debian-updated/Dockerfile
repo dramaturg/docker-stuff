@@ -1,5 +1,5 @@
 
-FROM debian:wheezy
+FROM debian:jessie
 
 ENV DEBIAN_FRONTEND noninteractive
 

@@ -10,20 +10,20 @@
 
 
 Package: *
-Pin: release n=wheezy
+Pin: release n=jessie
 Pin-Priority: 900
 
 Package: *
-Pin: release n=wheezy-backports
+Pin: release n=jessie-backports
 Pin-Priority: 900
 
 Package: *
-Pin: release n=wheezy-updates
+Pin: release n=jessie-updates
 Pin-Priority: 900
 
 
 Package: *
-Pin: release n=wheezy-proposed-updates
+Pin: release n=jessie-proposed-updates
 Pin-Priority: 700
 
 Package: *

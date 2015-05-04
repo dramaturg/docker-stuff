@@ -3,7 +3,7 @@ all:
 	docker build -t dramaturg/debian-updated .
 
 rebuild:
-	docker pull debian:wheezy
+	docker pull debian:jessie
 	docker build --no-cache=true -t dramaturg/debian-updated .
 
 push:
