@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386 && \
 	apt-get -y update && \
 	apt-get -y install td-agent build-essential libcurl4-gnutls-dev && \
 	apt-get clean
+#RUN td-agent-gem list | cut -d ' ' -f 1 | xargs -n 5 td-agent-gem update
 
 RUN mv /etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf.bak
 RUN td-agent-gem install fluent-plugin-secure-forward
