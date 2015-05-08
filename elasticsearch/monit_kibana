@@ -1,8 +1,8 @@
 
-check process kibana
-	matching "kibana.jar"
+check process kibana with pidfile "/var/run/kibana.pid"
 	group elasticsearch
 	depends on elasticsearch
-	start program = "/opt/kibana/bin/kibana"
-	stop  program = "/usr/bin/pkill -f kibana.jar"
+	start program = "/sbin/start-stop-daemon --start --user elasticsearch -c elasticsearch --background --make-pidfile --pidfile /var/run/kibana.pid --exec /opt/kibana/bin/kibana"
+	stop  program = "/usr/bin/pkill -f kibana"
+	if failed url http://127.0.0.1:5601/ with timeout 15 seconds then restart
 	if 5 restarts within 5 cycles then timeout
