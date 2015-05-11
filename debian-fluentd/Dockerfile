@@ -17,7 +17,8 @@ RUN dpkg --add-architecture i386 && \
 
 #RUN td-agent-gem update fluentd && \
 RUN td-agent-gem install fluent-plugin-secure-forward && \
-	td-agent-gem install fluent-plugin-newsyslog
+	td-agent-gem install fluent-plugin-newsyslog && \
+	td-agent-gem install fluent-plugin-forest
 
 RUN mv /etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf.bak
 
