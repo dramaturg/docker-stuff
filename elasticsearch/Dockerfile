@@ -60,6 +60,8 @@ ENV conff_elasticsearch /etc/elasticsearch/elasticsearch.yml
 
 RUN sed -i '/#\(cluster\.name: \).*/{s//\1 %%cluster_name%%/}' \
 		/etc/elasticsearch/elasticsearch.yml
+ADD fluentd_out_elasticsearch.conf /etc/td-agent/out_50_elasticsearch.conf
+RUN td-agent-gem install fluent-plugin-elasticsearch
 
 # fix for broken init script
 USER elasticsearch
